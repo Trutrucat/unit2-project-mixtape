@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
     const newSong = new Song({ title, artist, genre, decade });
     await newSong.save();
 
-    const playlist = await Playlist.findById(playlistId);
+    const playlist = await Playlist.findById(req.session.user.playlist);
     playlist.songs.push(newSong._id);
     await playlist.save();
 

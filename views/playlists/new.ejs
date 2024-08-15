@@ -9,14 +9,14 @@
     <%- include('../partials/_navbar.ejs') %>
     <form action="/users/<%= user._id %>/playlists" method="POST">
       <label for="title">Song Title:</label>
-      <input type="text" name="title" id="title" required>
+      <input type="text" name="name" placeholder="Song Name" required>
       <label for="artist">Artist:</label>
       <input type="text" name="artist" id="artist" required>
       <label for="genre">Genre:</label>
       <input type="text" name="genre" id="genre" required>
       <label for="decade">Decade</label>
       <input type="text" name="decade" id="decade" required>
-      <button type="submit">Add Song to Playlist</button>
+      <button type="submit">Create Playlist</button>
     </form>
   </body>
 </html>

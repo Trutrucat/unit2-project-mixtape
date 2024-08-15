@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 const User = require('../models/user.js');
+const Playlist = require('../models/playlist.js')
 
 router.get('/sign-up', (req, res) => {
   res.render('auth/sign-up.ejs');
@@ -36,7 +37,10 @@ router.post('/sign-up', async (req, res) => {
     req.body.password = hashedPassword;
   
     // All ready to create the new user!
+    const newPlaylist = await Playlist.create({ name: req.body.username + "'s Playlist"})
+    req.body.playlist = newPlaylist._id
     await User.create(req.body);
+    
   
     res.redirect('/auth/sign-in');
   } catch (error) {

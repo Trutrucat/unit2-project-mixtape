@@ -7,32 +7,30 @@
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Welcome to my Playlist</h1>
+  <h1>Welcome to My Playlists</h1>
   <a href="/users/<%= user._id %>/playlists/new">Add New Song</a>
-  <% if(playlist.length) { %>
-  <ul>
-    <% playlist.forEach((playlistItem) => { %>
-      <li><strong><%= playlistItem.name %></strong></li>
-      <ul>
-        <% playlistItem.songs.forEach((song) => { %>
-          <li>
-            <strong>Title:</strong> <%= song.title %> <br>
-            <strong>Artist:</strong> <%= song.artist %> <br>
-            <strong>Genre:</strong> <%= song.genre %> <br>
-            <strong>Decade:</strong> <%= song.decade %> <br>
-            <a href="/users/<%= user._id %>/playlists/<%= song._id %>/edit">Edit</a>
-            <form
-            action="/users/<%= user._id %>/playlists/<%= song._id %>?_method=DELETE"
-            method="POST"
-          >
-          <button type="submit">Delete</button>
-          </li>
+  <% if (playlist.length) { %>
+    <ul>
+      <% playlist.forEach((playlistItem) => { %>
+        <li><strong>Playlist</strong></li>
+        <ul>
+          <% playlistItem.songs.forEach((song) => { %>
+            <li>
+              <strong>Title:</strong> <%= song.title %> <br>
+              <strong>Artist:</strong> <%= song.artist %> <br>
+              <strong>Genre:</strong> <%= song.genre %> <br>
+              <strong>Decade:</strong> <%= song.decade %> <br>
+              <a href="/songs/<%= song._id %>/edit">Edit</a>
+              <form action="/songs/<%= song._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+            </li>
           <% }) %>
         </ul>
-        <% }) %>
-      </ul>
-      <% } else { %>
-        <p>There are no songs on this playlist.</p>
-      <% } %>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>There are no songs in this playlist.</p>
+  <% } %>
 </body>
 </html>

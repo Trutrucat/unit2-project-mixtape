@@ -1,40 +1,7 @@
 const mongoose = require('mongoose');
+const Playlist = require('./playlist');
 
-const songSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  artist: {
-    type: String,
-    required: true,
-  },
-  genre: {
-    type: String,
-    required: true,
-  },
-  decade: {
-    type: String,
-    required: true,
-  }
-})
-
-const playlistSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  songs: [
-    {
-      title: { type: String, required: true},
-      artist: { type: String, required: true },
-      genre: { type: String, required: true },
-      decade: { type: String, required: true},
-    },
-  ],
-});
-
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -43,7 +10,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  playlist: [playlistSchema],
+  playlists: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Playlist'
+  }]
 });
 
 const User = mongoose.model('User', userSchema);

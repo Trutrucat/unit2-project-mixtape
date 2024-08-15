@@ -24,6 +24,14 @@ const playlistSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  songs: [
+    {
+      title: { type: String, required: true},
+      artist: { type: String, required: true },
+      genre: { type: String, required: true },
+      decade: { type: String, required: true},
+    },
+  ],
 });
 
 const userSchema = mongoose.Schema({

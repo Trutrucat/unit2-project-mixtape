@@ -22,7 +22,11 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
     try {
       const currentUser = await User.findById(req.session.user._id);
-      currentUser.playlist.push(req.body);
+      const newPlaylist = {
+        name: req.body.name,
+        songs: [],
+      };
+      currentUser.playlist.push(newPlaylist);
       await currentUser.save();
       res.redirect(`/users/${currentUser._id}/playlists`);
     } catch (error) {

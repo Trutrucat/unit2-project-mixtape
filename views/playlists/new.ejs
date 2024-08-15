@@ -8,7 +8,6 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <form action="/users/<%= user._id %>/playlists" method="POST">
-      <input type="hidden" name="playlistId" value="<%= playlist._id %>">
       <label for="title">Song Title:</label>
       <input type="text" name="title" id="title" required>
       <label for="artist">Artist:</label>

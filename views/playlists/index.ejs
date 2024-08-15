@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Playlist</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Welcome to my Playlist</h1>
+  <a href="/users/<%= user._id %>/playlists/new">Add New Song</a>
+  <% if(playlist.length) { %>
+  <ul>
+    <% playlist.forEach((song)=>{ %>
+      <li>
+        <%= song.name %>
+        <a href="/users/<%= user._id %>/playlists/<%= song._id %>/edit">
+          Edit
+        </a>
+        <form
+          action="/users/<%= user._id %>/playlists/<%= song._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <% } else { %>
+    <p>There are no songs on this playlist.</p>
+  <% } %>
+</body>
+</html>

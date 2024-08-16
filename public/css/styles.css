@@ -46,7 +46,7 @@ button {
   background-color: hsl(136, 91%, 67%);
   color: #1C1C1C;
   font-size: 20px;
-  padding: 10px 20px;
+  padding: 5px 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -73,3 +73,81 @@ button:hover {
     font-size: 70px;
   }
 }
+
+a {
+  color: #47098a;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+a:hover, a:focus {
+  color: #FF6B6B;
+  background-color: #1C1C1C;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+a.button {
+  display: inline-block;
+  background-color: #FFD93D;
+  color: #1C1C1C;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a.button:hover, a.button:focus {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+a.edit-link {
+  color: #4CAF50;
+  font-size: 16px;
+}
+
+a.edit-link:hover {
+  color: #3E8E41;
+}
+
+input[type="text"], input[type="password"], textarea {
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+  border-color: #FFD93D;
+  outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #888;
+}
+
+label {
+  color: #47098a;
+  font-size: 18px; 
+  margin-bottom: 5px; 
+  display: block; 
+  font-family: 'Arial', sans-serif; 
+}
+
+
+
+
+
+

@@ -9,17 +9,18 @@
   <%- include('../partials/_navbar.ejs') %>
   <h1>Welcome to My Playlist</h1>
   <a href="/users/<%= user._id %>/playlists/new">Add New Song</a>
-   <div>
-          <strong><%= playlist.name %></strong>
-          <ul>
-            <% if (playlist.songs.length > 0) { %>
-              <% playlist.songs.forEach((song) => { %>
-                <li><%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)</li>
-              <% }) %>
-            <% } else { %>
-              <li>No songs in this playlist</li>
-            <% } %>
-          </ul>
-        </div>
-    </body>
+  <div>
+    <strong><%= playlist.name %></strong>
+    <ul>
+      <% if (playlist.songs.length > 0) { %>
+        <% playlist.songs.forEach((song) => { %>
+          <li><%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)</li>
+        <% }) %>
+      <% } else { %>
+        <li>No songs in this playlist</li>
+      <% } %>
+    </ul>
+  </div>
+</body>
 </html>
+

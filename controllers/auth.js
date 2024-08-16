@@ -39,7 +39,10 @@ router.post('/sign-up', async (req, res) => {
     // All ready to create the new user!
     const newPlaylist = await Playlist.create({ name: req.body.username + "'s Playlist"})
     req.body.playlist = newPlaylist._id
-    await User.create(req.body);
+    const user = await User.create(req.body);
+    newPlaylist.user = user._id
+    await newPlaylist.save()
+    
     
   
     res.redirect('/auth/sign-in');
@@ -58,9 +61,7 @@ router.post('/sign-in', async (req, res) => {
     }
   
     // There is a user! Time to test their password with bcrypt
-    const validPassword = bcrypt.compareSync(
-      req.body.password,
-      userInDatabase.password
+    const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password
     );
     if (!validPassword) {
       return res.send('Login failed. Please try again.');

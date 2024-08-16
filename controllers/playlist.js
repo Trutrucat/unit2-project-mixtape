@@ -1,8 +1,8 @@
 const User = require('../models/user.js');
 const express = require('express');
 const router = express.Router();
-const Playlist = require('../models/playlist');
-const Song = require('../models/song')
+const Playlist = require('../models/playlist.js');
+const Song = require('../models/song.js')
 
 
 router.get('/', async (req, res) => {
@@ -13,6 +13,10 @@ router.get('/', async (req, res) => {
           path: 'songs'
         }
         });
+        console.log(currentUser)
+        if (!currentUser.playlist) {
+          return res.send('No playlist found for this user.');
+        }
       res.render('playlists/index.ejs', {
         playlist: currentUser.playlist,
         user: currentUser,
@@ -30,13 +34,13 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
-    const newPlaylist = new Playlist({
-      name: req.body.name,
-      songs: [] 
-    });
-    await newPlaylist.save();
+    console.log('Current User', currentUser)
+    const newPlaylist = await Playlist.findById(currentUser.playlist);
 
-    currentUser.playlists.push(newPlaylist._id);
+    const newSong = new Song(req.body);
+    await newSong.save();
+
+    newPlaylist.songs.push(newSong._id);
     await currentUser.save();
 
     res.redirect(`/users/${currentUser._id}/playlists`);
@@ -46,23 +50,28 @@ router.post('/', async (req, res) => {
   }
 });
 
-  router.delete('/:playlistId', async (req, res) => {
-    try {
-      const currentUser = await User.findById(req.session.user._id);
-      currentUser.playlists.pull(req.params.playlistId);
-      await currentUser.save();
-      await Playlist.findByIdAndDelete(req.params.playlistId);
-      res.redirect(`/users/${currentUser._id}/playlists`);
-    } catch (error) {
-      console.log(error);
-      res.redirect('/')
-    }
-  });
+router.delete('/:songId', async (req, res) => {
+  try {
+    await Song.findByIdAndDelete(req.params.songId);
+
+    const playlists = await Playlist.find({ 'songs': req.params.songId });
+    playlists.forEach(async (playlist) => {
+      playlist.songs.pull(req.params.songId);
+      await playlist.save();
+    });
+
+    res.redirect(`/users/${req.session.user._id}/playlists`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
 
 router.get('/:playlistId/edit', async (req, res) => {
     try {
       const currentUser = await User.findById(req.session.user._id);
-      const playlist = currentUser.playlist.id(req.params.playlistId);
+      const playlist = await Playlist.findById(currentUser.playlist);
       res.render('playlists/edit.ejs', {
         playlist: playlist,
       });
@@ -75,9 +84,9 @@ router.get('/:playlistId/edit', async (req, res) => {
 router.put('/:playlistId', async (req, res) => {
     try {
       const currentUser = await User.findById(req.session.user._id);
-      const playlist = currentUser.playlist.id(req.params.playlistId);
+      const playlist = await Playlist.findById(currentUser.playlistId);
       playlist.set(req.body);
-      await currentUser.save();
+      await playlist.save();
       res.redirect(
         `/users/${currentUser._id}/playlists/`
       );
@@ -86,43 +95,18 @@ router.put('/:playlistId', async (req, res) => {
       res.redirect('/')
     }
   });
-  // router.post('/', async (req, res) => {
-  //   try {
-  //     const { userId } = req.params;
-  //     const { title, artist, genre, decade } = req.body;
-  //     const user = await User.findById(userId);
   
-  //     if (!user) {
-  //       return res.status(404).send('User not found');
-  //     }
-  //     let playlist = user.playlists[0];
-  
-  //     if (!playlist) {
-  //       playlist = new Playlist({ songs: [] });
-  //       await playlist.save();
-  //       user.playlists.push(playlist);
-  //     }
-  //     playlist.songs.push({ title, artist, genre, decade });
-  //     await playlist.save();
-  
-  //     await user.save();
-  
-  //     res.redirect(`/users/${userId}/playlists`);
-  //   } catch (error) {
-  //     console.log(error);
-  //     res.redirect('/');
-  //   }
-  // });
-  
-  router.get('/:playlistId/songs/new', async (req, res) => {
+  router.get('/:songId/edit', async (req, res) => {
     try {
-      const playlist = await Playlist.findById(req.params.playlistId);
-      res.render('songs/new', { playlist });
+      const song = await Song.findById(req.params.songId);
+      res.render('songs/edit.ejs', { song });
     } catch (error) {
       console.log(error);
       res.redirect('/');
     }
   });
+  
+  
   
   router.post('/:playlistId/songs', async (req, res) => {
     try {

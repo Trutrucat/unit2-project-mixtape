@@ -11,7 +11,7 @@ const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
 const authController = require('./controllers/auth.js');
 const usersController = require('./controllers/users.js');
-const playlistsController = require('./controllers/playlists.js');
+const playlistsController = require('./controllers/playlist.js');
 const songsController = require('./controllers/songs.js');
 
 const port = process.env.PORT ? process.env.PORT : '3000';

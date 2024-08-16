@@ -20,7 +20,7 @@
             <%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)
             <a href="/songs/<%= song._id %>/edit">Edit</a>
             <form action="/songs/<%= song._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button type="submit">Delete</button>
+              <button type="submit" class="btn btn-link">Delete</button>
             </form>
           </li>
         <% }) %>

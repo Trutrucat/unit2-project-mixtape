@@ -146,6 +146,58 @@ label {
   font-family: 'Arial', sans-serif; 
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0; 
+}
+
+
+nav a {
+  color: #47098a; 
+  text-decoration: none; 
+  margin: 0 15px; 
+  font-size: 18px; 
+  font-weight: bold; 
+  transition: color 0.3s; 
+}
+
+nav a:hover, nav a:focus {
+  color: #FF6B6B;
+}
+.btn-link {
+  background: none;
+  border: none;
+  color: #47098a;
+  padding: 0;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.btn-link:hover {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+.btn-link:focus {
+  outline: none;
+}
+.cassette-image {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: auto;
+  z-index: 100;
+}
+
+
+
 
 
 

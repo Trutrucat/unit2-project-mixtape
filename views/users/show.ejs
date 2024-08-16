@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= pageOwner.username %>'s Playlist</title>
+  <title>Playlist</title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Welcome to <%= pageOwner.username %>'s Mixtape</h1>
-  <% if(pageOwner.playlist.length) { %>
-  <p>Currently stocked with:</p>
+  <link rel="stylesheet" href="/css/styles.css">
+  <h1><%= playlist.name %></h1>
   <ul>
-    <% pageOwner.playlist.forEach((song)=>{ %>
-      <li><%= song.name %></li>
-    <% }) %>
+    <% if (playlist.songs.length > 0) { %>
+      <% playlist.songs.forEach((song) => { %>
+        <li><%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)</li>
+      <% }) %>
+    <% } else { %>
+      <li>No songs in this playlist</li>
+    <% } %>
   </ul>
-  <% } else { %>
-    <p>There are no songs on this playlist.</p>
-  <% } %>
 </body>
 </html>

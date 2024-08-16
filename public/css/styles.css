@@ -1,0 +1,82 @@
+/* Importing the retro font */
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+h1, h2, h3, .monoton-regular {
+  font-family: "Monoton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+body {
+  background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Flexbox container for the main content */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Retro styled titles */
+h1, h2, h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 60px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Flexbox for organizing content in rows */
+.flex-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* Adding more color to buttons */
+button {
+  background-color: #FFD93D;
+  color: #1C1C1C;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+/* Styling individual items in Flexbox */
+.item {
+  flex: 1;
+  margin: 10px;
+  text-align: center;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+  .flex-row {
+    flex-direction: column;
+  }
+
+  h1, h2, h3 {
+    font-size: 40px;
+  }
+}

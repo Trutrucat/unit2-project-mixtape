@@ -14,7 +14,13 @@
     <ul>
       <% if (playlist.songs.length > 0) { %>
         <% playlist.songs.forEach((song) => { %>
-          <li><%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)</li>
+          <li>
+            <%= song.title %> by <%= song.artist %> - <%= song.genre %> (<%= song.decade %>)
+            <a href="/songs/<%= song._id %>/edit">Edit</a>
+            <form action="/songs/<%= song._id %>?_method=DELETE" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
         <% }) %>
       <% } else { %>
         <li>No songs in this playlist</li>
@@ -23,4 +29,5 @@
   </div>
 </body>
 </html>
+
 

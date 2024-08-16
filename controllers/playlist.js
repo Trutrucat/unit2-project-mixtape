@@ -34,14 +34,16 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
-    console.log('Current User', currentUser)
-    const newPlaylist = await Playlist.findById(currentUser.playlist);
+    const playlist = await Playlist.findById(currentUser.playlist);
+    console.log('Request Body for New Song:', req.body)
 
     const newSong = new Song(req.body);
     await newSong.save();
+    console.log('New Song:', newSong)
 
-    newPlaylist.songs.push(newSong._id);
-    await currentUser.save();
+    playlist.songs.push(newSong._id);
+    await playlist.save();
+    console.log('Updated Playlist:', newPlaylist)
 
     res.redirect(`/users/${currentUser._id}/playlists`);
   } catch (error) {

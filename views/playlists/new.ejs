@@ -8,15 +8,17 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <form action="/users/<%= user._id %>/playlists" method="POST">
-      <label for="title">Song Title:</label>
-      <input type="text" name="name" placeholder="Song Title" required>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
       <label for="artist">Artist:</label>
-      <input type="text" name="artist" id="artist" required>
+      <input type="text" id="artist" name="artist" required>
       <label for="genre">Genre:</label>
-      <input type="text" name="genre" id="genre" required>
-      <label for="decade">Decade</label>
-      <input type="text" name="decade" id="decade" required>
+      <input type="text" id="genre" name="genre" required>
+      <label for="decade">Decade:</label>
+      <input type="text" id="decade" name="decade" required>
       <button type="submit">Add Song</button>
-    </form>
+    </form>    
   </body>
 </html>

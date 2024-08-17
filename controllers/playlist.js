@@ -22,7 +22,6 @@ router.get('/', async (req, res) => {
         user: currentUser,
       });
     } catch (error) {
-      console.log(error)
       res.redirect('/')
     }
   });
@@ -47,7 +46,6 @@ router.post('/', async (req, res) => {
 
     res.redirect(`/users/${currentUser._id}/playlists`);
   } catch (error) {
-    console.log(error);
     res.redirect('/');
   }
 });
@@ -64,7 +62,6 @@ router.delete('/:songId', async (req, res) => {
 
     res.redirect(`/users/${req.session.user._id}/playlists`);
   } catch (error) {
-    console.log(error);
     res.redirect('/');
   }
 });
@@ -78,7 +75,6 @@ router.get('/:playlistId/edit', async (req, res) => {
         playlist: playlist,
       });
     } catch (error) {
-      console.log(error);
       res.redirect('/')
     }
   });
@@ -93,7 +89,6 @@ router.put('/:playlistId', async (req, res) => {
         `/users/${currentUser._id}/playlists/`
       );
     } catch (error) {
-      console.log(error);
       res.redirect('/')
     }
   });
@@ -103,7 +98,6 @@ router.put('/:playlistId', async (req, res) => {
       const song = await Song.findById(req.params.songId);
       res.render('songs/edit.ejs', { song });
     } catch (error) {
-      console.log(error);
       res.redirect('/');
     }
   });
@@ -121,7 +115,6 @@ router.put('/:playlistId', async (req, res) => {
   
       res.redirect(`/users/${req.session.user._id}/playlists/${playlist._id}`);
     } catch (error) {
-      console.log(error);
       res.redirect('/');
     }
   });
